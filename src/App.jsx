@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Header from './components/Header'
+import IconoNuevogasto from './img/nuevo-gasto.svg'
 
 
 function App() {
@@ -18,6 +19,19 @@ function App() {
         isValidPresupuesto={isValidPresupuesto}
         setIsValidPresupuesto={setIsValidPresupuesto}
       />
+
+      {isValidPresupuesto && (  //El && es para que si cumple la función lo ejecut
+        <div className='nuevo-gasto'>
+          <img
+            src={IconoNuevogasto}
+            alt='icono nuevo gasto'
+          />
+        </div>
+      )}
+
+
+
+
     </>
   )
 }

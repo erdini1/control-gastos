@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import Header from './components/Header'
-import IconoNuevogasto from './img/nuevo-gasto.svg'
 import Modal from './components/Modal'
+import {generarId} from "./helpers/index"
+import IconoNuevogasto from './img/nuevo-gasto.svg'
 
 
 function App() {
@@ -23,7 +24,16 @@ function App() {
   }
 
   const guardarGasto = gasto => { //Va a tomar un objeto de gasto
-    setGastos(gasto)
+    gasto.id = generarId()
+    setGastos([...gastos, gasto])
+
+    setAnimarModal(false) //Esto es para que se cierre una vez que cargo los datos
+
+    setTimeout(() => {
+      setModal(false)
+    }, 500)
+
+
   }
 
   return (

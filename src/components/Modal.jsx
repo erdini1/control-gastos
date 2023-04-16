@@ -28,7 +28,7 @@ const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto }) => {
 
     const ocultarModal = () => {
         setAnimarModal(false)
-
+        
         setTimeout(() => {
             setModal(false)
         }, 500)

@@ -26,6 +26,7 @@ function App() {
 
   const guardarGasto = gasto => { //Va a tomar un objeto de gasto
     gasto.id = generarId()
+    gasto.fecha = Date.now()
     setGastos([...gastos, gasto])
 
     setAnimarModal(false) //Esto es para que se cierre una vez que cargo los datos

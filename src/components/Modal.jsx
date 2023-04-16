@@ -1,16 +1,32 @@
 import { useState } from "react"
+import Mensaje from "./Mensaje"
 import CerrarBtn from "../img/cerrar.svg"
 
-const Modal = ({ setModal, animarModal, setAnimarModal }) => {
+const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto }) => {
 
     // asigno las variables de los formularios
     const [nombre, setNombre] = useState("")
-    const [cantidad, setCantidad] = useState(0)
+    const [cantidad, setCantidad] = useState("")
     const [categoria, setCategoria] = useState("")
+    const [mensaje, setMensaje] = useState("")
+
+    const handleSubmit = e => {
+        e.preventDefault()
+
+        if ([nombre, cantidad, categoria].includes("")) {
+            setMensaje("Todos los campos son obligatorios")
+
+            setTimeout(() => {  //Para que el error se vaya despues de 3 segundos
+                setMensaje("")
+            }, 3000)
+            return
+        }
+        guardarGasto({nombre, cantidad, categoria})
+
+    }
 
 
     const ocultarModal = () => {
-
         setAnimarModal(false)
 
         setTimeout(() => {
@@ -28,8 +44,13 @@ const Modal = ({ setModal, animarModal, setAnimarModal }) => {
                 />
             </div>
 
-            <form className={`formulario ${animarModal ? "animar" : "cerrar"}`}> {/* Clases dinamicas */}
+            <form
+                onSubmit={handleSubmit}
+                className={`formulario ${animarModal ? "animar" : "cerrar"}`}
+            > {/* Clases dinamicas */}
                 <legend>Nuevo Gasto</legend>
+
+                {mensaje && <Mensaje tipo="error">{mensaje}</Mensaje>}
 
                 <div className="campo">
                     <label htmlFor="nombre">Nombre Gasto</label>
@@ -56,10 +77,11 @@ const Modal = ({ setModal, animarModal, setAnimarModal }) => {
                 <div className="campo">
                     <label htmlFor="categoria">Categoria</label>
 
-                    <select 
-                    id="categoria" 
-                    value={categoria}
-                    onChange={e => setCategoria(e.target.value)}>
+                    <select
+                        id="categoria"
+                        value={categoria}
+                        onChange={e => setCategoria(e.target.value)}
+                    >
                         <option value="">-- Seleccione --</option>
                         <option value="ahorro">Ahorro</option>
                         <option value="comida">Comida</option>

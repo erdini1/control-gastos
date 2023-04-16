@@ -9,10 +9,17 @@ function App() {
   const [presupuesto, setPresupuesto] = useState(0)
   const [isValidPresupuesto, setIsValidPresupuesto] = useState(false)
   const [modal, setModal] = useState(false)
+  const [animarModal, setAnimarModal] = useState(false)
+
 
 
   const handleNuevoGasto = () => {
     setModal(true)
+
+    setTimeout(() => {    //cuando pasen los 3 segundos se ejecuta esta linea
+      setAnimarModal(true)
+    }, 500)
+
   }
 
 
@@ -38,6 +45,8 @@ function App() {
       {modal &&
         <Modal
           setModal={setModal}
+          animarModal={animarModal}
+          setAnimarModal={setAnimarModal}
         />}
 
 

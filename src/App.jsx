@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import Header from './components/Header'
 import Modal from './components/Modal'
-import {generarId} from "./helpers/index"
+import ListadoGastos from './components/ListadoGastos'
+import { generarId } from "./helpers/index"
 import IconoNuevogasto from './img/nuevo-gasto.svg'
 
 
@@ -32,8 +33,6 @@ function App() {
     setTimeout(() => {
       setModal(false)
     }, 500)
-
-
   }
 
   return (
@@ -46,13 +45,20 @@ function App() {
       />
 
       {isValidPresupuesto && (  //El && es para que si cumple la función lo ejecut
-        <div className='nuevo-gasto'>
-          <img
-            src={IconoNuevogasto}
-            alt='icono nuevo gasto'
-            onClick={handleNuevoGasto}
-          />
-        </div>
+        <>
+          <main>
+            <ListadoGastos
+              gastos={gastos}
+            />
+          </main>
+          <div className='nuevo-gasto'>
+            <img
+              src={IconoNuevogasto}
+              alt='icono nuevo gasto'
+              onClick={handleNuevoGasto}
+            />
+          </div>
+        </>
       )}
 
       {modal &&

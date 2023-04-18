@@ -1,14 +1,30 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Mensaje from "./Mensaje"
 import CerrarBtn from "../img/cerrar.svg"
 
-const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto }) => {
+const Modal = ({
+    setModal,
+    animarModal,
+    setAnimarModal,
+    guardarGasto,
+    gastoEditar
+}) => {
 
     // asigno las variables de los formularios
     const [nombre, setNombre] = useState("")
     const [cantidad, setCantidad] = useState("")
     const [categoria, setCategoria] = useState("")
     const [mensaje, setMensaje] = useState("")
+
+    useEffect(() => {
+        if (Object.keys(gastoEditar).length > 0) {
+            setNombre(gastoEditar.nombre)
+            setCantidad(gastoEditar.cantidad)
+            setCategoria(gastoEditar.categoria)
+            
+        }   //si gasto editar viene vacio es un registro nuevo pero si viene con algo estamos editando, si lo estamos editando vamos a llenar los campos con los hooks
+    }, [])
+
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -21,14 +37,14 @@ const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto }) => {
             }, 3000)
             return
         }
-        guardarGasto({nombre, cantidad, categoria})
+        guardarGasto({ nombre, cantidad, categoria })
 
     }
 
 
     const ocultarModal = () => {
         setAnimarModal(false)
-        
+
         setTimeout(() => {
             setModal(false)
         }, 500)

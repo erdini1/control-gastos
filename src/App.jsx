@@ -19,13 +19,18 @@ function App() {
   const [gastoEditar, setGastoEditar] = useState({})
 
   useEffect(() => {
-    if(Object.keys(gastoEditar).length > 0){
-      handleNuevoGasto()
+    if (Object.keys(gastoEditar).length > 0) {
+      setModal(true)
+
+      setTimeout(() => {    //cuando pasen los 3 segundos se ejecuta esta linea
+        setAnimarModal(true)
+      }, 500)
     }
   }, [gastoEditar])
 
   const handleNuevoGasto = () => {
     setModal(true)
+    setGastoEditar({})
 
     setTimeout(() => {    //cuando pasen los 3 segundos se ejecuta esta linea
       setAnimarModal(true)
@@ -45,7 +50,7 @@ function App() {
   }
 
   return (
-    <div className={modal ? "fijar": ""}>
+    <div className={modal ? "fijar" : ""}>
       <Header
         gastos={gastos}
         presupuesto={presupuesto}
@@ -78,6 +83,7 @@ function App() {
           animarModal={animarModal}
           setAnimarModal={setAnimarModal}
           guardarGasto={guardarGasto}
+          gastoEditar={gastoEditar}
         />}
 
 

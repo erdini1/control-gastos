@@ -8,6 +8,7 @@ const Modal = ({
     setAnimarModal,
     guardarGasto,
     gastoEditar,
+    setGastoEditar
 }) => {
 
     // asigno las variables de los formularios
@@ -47,7 +48,7 @@ const Modal = ({
 
     const ocultarModal = () => {
         setAnimarModal(false)
-
+        setGastoEditar({})
         setTimeout(() => {
             setModal(false)
         }, 500)

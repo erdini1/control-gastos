@@ -7,7 +7,7 @@ const Modal = ({
     animarModal,
     setAnimarModal,
     guardarGasto,
-    gastoEditar
+    gastoEditar,
 }) => {
 
     // asigno las variables de los formularios

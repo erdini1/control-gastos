@@ -38,7 +38,6 @@ function App() {
   }
 
   const guardarGasto = gasto => { //Va a tomar un objeto de gasto
-    console.log(gasto)
     if(gasto.id){
       //Actualizar
       const gastosActualizado = gastos.map(gastoState => gastoState.id === gasto.id ? gasto : gastoState)
@@ -59,6 +58,11 @@ function App() {
     }, 500)
   }
 
+  const eliminarGasto = id => {
+    const gastosActualizados = gastos.filter(gasto => gasto.id !== id)   //Esto es para filtar los que sean diferentes a los que estoy pidiendo
+    setGastos(gastosActualizados)
+  }
+
   return (
     <div className={modal ? "fijar" : ""}>
       <Header
@@ -75,6 +79,7 @@ function App() {
             <ListadoGastos
               gastos={gastos}
               setGastoEditar={setGastoEditar}
+              eliminarGasto={eliminarGasto}
             />
           </main>
           <div className='nuevo-gasto'>

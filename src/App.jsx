@@ -38,9 +38,19 @@ function App() {
   }
 
   const guardarGasto = gasto => { //Va a tomar un objeto de gasto
-    gasto.id = generarId()
-    gasto.fecha = Date.now()
-    setGastos([...gastos, gasto])
+    console.log(gasto)
+    if(gasto.id){
+      //Actualizar
+      const gastosActualizado = gastos.map(gastoState => gastoState.id === gasto.id ? gasto : gastoState)
+      setGastos(gastosActualizado)
+
+    } else{
+      //Nuevo Gasto   //Cuando haya un nuevo gasto le va a poner un nuevo id
+      gasto.id = generarId()
+      gasto.fecha = Date.now()
+      setGastos([...gastos, gasto])
+    }
+    
 
     setAnimarModal(false) //Esto es para que se cierre una vez que cargo los datos
 

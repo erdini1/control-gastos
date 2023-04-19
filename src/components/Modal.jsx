@@ -11,16 +11,20 @@ const Modal = ({
 }) => {
 
     // asigno las variables de los formularios
+    const [mensaje, setMensaje] = useState("")
     const [nombre, setNombre] = useState("")
     const [cantidad, setCantidad] = useState("")
     const [categoria, setCategoria] = useState("")
-    const [mensaje, setMensaje] = useState("")
+    const [fecha, setFecha] = useState("")
+    const [id, setId] = useState("")
 
     useEffect(() => {
         if (Object.keys(gastoEditar).length > 0) {
             setNombre(gastoEditar.nombre)
             setCantidad(gastoEditar.cantidad)
             setCategoria(gastoEditar.categoria)
+            setId(gastoEditar.id)
+            setFecha(gastoEditar.fecha)
             
         }   //si gasto editar viene vacio es un registro nuevo pero si viene con algo estamos editando, si lo estamos editando vamos a llenar los campos con los hooks
     }, [])
@@ -37,8 +41,7 @@ const Modal = ({
             }, 3000)
             return
         }
-        guardarGasto({ nombre, cantidad, categoria })
-
+        guardarGasto({ nombre, cantidad, categoria, id, fecha })
     }
 
 
@@ -64,7 +67,7 @@ const Modal = ({
                 onSubmit={handleSubmit}
                 className={`formulario ${animarModal ? "animar" : "cerrar"}`}
             > {/* Clases dinamicas */}
-                <legend>Nuevo Gasto</legend>
+                <legend>{gastoEditar.nombre ? "Editar Gasto" : "Nuevo Gasto"}</legend>
 
                 {mensaje && <Mensaje tipo="error">{mensaje}</Mensaje>}
 
@@ -111,7 +114,7 @@ const Modal = ({
 
                 <input
                     type="submit"
-                    value="Añadir gasto"
+                    value={gastoEditar.nombre ? "Guardar cambios" : "Añadir Gasto"}
                 />
 
             </form>

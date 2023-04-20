@@ -10,7 +10,9 @@ function App() {
 
   const [gastos, setGastos] = useState([])
 
-  const [presupuesto, setPresupuesto] = useState(0)
+  const [presupuesto, setPresupuesto] = useState(
+    Number(localStorage.getItem("presupuesto") ?? 0)  //Aca asigno el valor que tiene en localstorage
+  )
   const [isValidPresupuesto, setIsValidPresupuesto] = useState(false)
 
   const [modal, setModal] = useState(false)
@@ -28,6 +30,18 @@ function App() {
     }
   }, [gastoEditar])
 
+  useEffect(() => {
+    localStorage.setItem("presupuesto", presupuesto ?? 0) //cuando inice la app se le va a asginar el valor de presupuesto a menos que si no tiene nada va ir a ir cero
+  }, [presupuesto])
+
+  useEffect(() => {
+    const presupuestoLS = Number(localStorage.getItem("presupuesto")) ?? 0
+
+    if(presupuestoLS > 0){
+      setIsValidPresupuesto(true)
+    }
+  }, [])  //si esta el [] vacio es para que se ejecute solo una vez
+
   const handleNuevoGasto = () => {
     setModal(true)
     setGastoEditar({})
@@ -38,18 +52,18 @@ function App() {
   }
 
   const guardarGasto = gasto => { //Va a tomar un objeto de gasto
-    if(gasto.id){
+    if (gasto.id) {
       //Actualizar
       const gastosActualizado = gastos.map(gastoState => gastoState.id === gasto.id ? gasto : gastoState)
       setGastos(gastosActualizado)
       setGastoEditar({})
-    } else{
+    } else {
       //Nuevo Gasto   //Cuando haya un nuevo gasto le va a poner un nuevo id
       gasto.id = generarId()
       gasto.fecha = Date.now()
       setGastos([...gastos, gasto])
     }
-    
+
 
     setAnimarModal(false) //Esto es para que se cierre una vez que cargo los datos
 

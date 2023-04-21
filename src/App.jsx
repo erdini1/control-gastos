@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Header from './components/Header'
 import Modal from './components/Modal'
 import ListadoGastos from './components/ListadoGastos'
+import Filtros from './components/Filtros'
 import { generarId } from "./helpers/index"
 import IconoNuevogasto from './img/nuevo-gasto.svg'
 
@@ -23,6 +24,8 @@ function App() {
 
   const [gastoEditar, setGastoEditar] = useState({})
 
+    const [filtro, setFiltro] = useState("")
+
   useEffect(() => {
     if (Object.keys(gastoEditar).length > 0) {
       setModal(true)
@@ -38,12 +41,18 @@ function App() {
   }, [presupuesto])
 
   useEffect(() => {
-    localStorage.setItem("gastos", JSON.stringify(gastos) ?? [] )
+    localStorage.setItem("gastos", JSON.stringify(gastos) ?? [])
   }, [gastos])
 
   useEffect(() => {
+    if(filtro){
+      console.log("Filtrando", filtro)
+    }
+  }, [filtro])
+
+  useEffect(() => {
     const presupuestoLS = Number(localStorage.getItem("presupuesto")) ?? 0
-    if(presupuestoLS > 0){
+    if (presupuestoLS > 0) {
       setIsValidPresupuesto(true)
     }
   }, [])  //si esta el [] vacio es para que se ejecute solo una vez
@@ -70,7 +79,6 @@ function App() {
       setGastos([...gastos, gasto])
     }
 
-
     setAnimarModal(false) //Esto es para que se cierre una vez que cargo los datos
 
     setTimeout(() => {
@@ -93,9 +101,15 @@ function App() {
         setIsValidPresupuesto={setIsValidPresupuesto}
       />
 
+
+
       {isValidPresupuesto && (  //El && es para que si cumple la función lo ejecut
         <>
           <main>
+            <Filtros
+              filtro={filtro}
+              setFiltro={setFiltro}
+            />
             <ListadoGastos
               gastos={gastos}
               setGastoEditar={setGastoEditar}

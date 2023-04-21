@@ -1,4 +1,5 @@
 :root {
+    --verde: #006A4E;
     --rojo: #d61717c3;
     --azul: #3b82f6;
     --blanco: #ffffff;
@@ -45,7 +46,7 @@ h2 {
 }
 
 header {
-    background-color: var(--rojo);
+    background-color: var(--verde);
 }
 
 header h1 {
@@ -208,7 +209,7 @@ header h1 {
 }
 .contenido-presupuesto p.negativo,
 .contenido-presupuesto p.negativo span {
-    color: red;
+    color: #d61717c3;
 }
 .contenido-presupuesto span {
     font-weight: 900;

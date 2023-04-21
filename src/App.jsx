@@ -8,7 +8,10 @@ import IconoNuevogasto from './img/nuevo-gasto.svg'
 
 function App() {
 
-  const [gastos, setGastos] = useState([])
+  const [gastos, setGastos] = useState(
+    //Primero se comprueba que exista la primera parte, si no existe inicia como un arreglo vacio, caso contrario como un array
+    localStorage.getItem("gastos") ? JSON.parse(localStorage.getItem("gastos")) : []
+  )
 
   const [presupuesto, setPresupuesto] = useState(
     Number(localStorage.getItem("presupuesto") ?? 0)  //Aca asigno el valor que tiene en localstorage
@@ -35,8 +38,11 @@ function App() {
   }, [presupuesto])
 
   useEffect(() => {
-    const presupuestoLS = Number(localStorage.getItem("presupuesto")) ?? 0
+    localStorage.setItem("gastos", JSON.stringify(gastos) ?? [] )
+  }, [gastos])
 
+  useEffect(() => {
+    const presupuestoLS = Number(localStorage.getItem("presupuesto")) ?? 0
     if(presupuestoLS > 0){
       setIsValidPresupuesto(true)
     }

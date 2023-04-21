@@ -13,7 +13,7 @@ const ControlPresupuesto = ({ gastos, presupuesto }) => {
         const totalGastado = gastos.reduce((total, gasto) => gasto.cantidad + total, 0)       //Va a acumular los datos en una sola variable
         const totalDisponible = presupuesto - totalGastado
 
-        const porcentajeGastado = (((presupuesto - totalDisponible) / presupuesto ) * 100).toFixed(2)
+        const porcentajeGastado = (((presupuesto - totalDisponible) / presupuesto) * 100).toFixed(2)
 
         setDisponible(totalDisponible)
         setGastado(totalGastado)

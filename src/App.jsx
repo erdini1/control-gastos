@@ -47,6 +47,7 @@ function App() {
   useEffect(() => {
     if(filtro){
       console.log("Filtrando", filtro)
+      //Filtrar Gastos por categorias
     }
   }, [filtro])
 

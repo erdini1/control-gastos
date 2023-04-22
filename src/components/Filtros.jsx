@@ -11,6 +11,7 @@ const Filtros = ({ filtro, setFiltro }) => {
                         id=""
                         value={filtro}
                         onChange={e => setFiltro(e.target.value)}
+                        className='md:w-2/3'
                     >
                         <option value="">-- Todos los categorias --</option>
                         <option value="ahorro">Ahorro</option>

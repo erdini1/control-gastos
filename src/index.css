@@ -407,3 +407,7 @@ body .modal {
     font-size: 2.4rem;
     text-align: right;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
